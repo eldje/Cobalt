@@ -1,5 +1,5 @@
 # Cobalt
-Cobalt is a complaint management tool designed for [Everaert-Cooreman](http://www.everaert-cooreman.com/). Cobalt allows users to track complaints that will produce the best results for both parties.
+Cobalt is a complaint management tool designed for [Everaert-Cooreman](http://www.everaert-cooreman.com/). Cobalt allows users to track complaints that will produce the best results for both parties. Cobalt runs natively on Windows, iOS, and Android.
 
 ## Technologies Used
 * SQL Server
