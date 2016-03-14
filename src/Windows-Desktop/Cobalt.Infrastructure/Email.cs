@@ -35,5 +35,36 @@ namespace Cobalt.Infrastructure
                 // ignored
             }
         }
+
+        /// <summary>
+        /// Send a new custom email with attachments.
+        /// </summary>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
+        /// <param name="subject"></param>
+        /// <param name="text"></param>
+        /// <param name="fileLoc"></param>
+        public void SendEmailAttachments(string from, IEnumerable<string> to, string subject, string text, string[] fileLoc)
+        {
+            try
+            {
+                var newMessage = new SendGridMessage
+                {
+                    From = new MailAddress(from),
+                    Subject = subject,
+                    Text = text,
+                    Attachments = fileLoc
+                };
+
+                newMessage.AddTo(to);
+
+                var transportWeb = new Web(Keys.SendGrid);
+                transportWeb.DeliverAsync(newMessage).Wait();
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
+        }
     }
 }
