@@ -1,6 +1,7 @@
 -- =============================================
 -- Author: Travis Boatman
 -- Create date: March 17, 2016
+-- Last modifed: March 24, 2016
 -- =============================================
 
 /****** Object:  Table [dbo].[Accounts]    Script Date: 3/17/2016 5:21:56 PM ******/
@@ -53,7 +54,8 @@ CREATE TABLE [dbo].[Complaints](
 	[ComplaintName] [nvarchar](50) NOT NULL,
 	[SubContractorContact] [int] NULL,
 	[DateCreated] [date] NOT NULL,
-	[Status] [int] NOT NULL,
+	[EmailSentDate] [date] NULL,
+	[Status] [int] NULL,
 	[Remarks] [text] NULL,
 	[CreatedBy] [int] NOT NULL,
 	[ClosedBy] [int] NULL,
