@@ -1,10 +1,10 @@
 -- =============================================
 -- Author: Travis Boatman
 -- Create date: March 17, 2016
--- Last modifed: March 24, 2016
+-- Last modifed: March 31, 2016
 -- =============================================
 
-/****** Object:  Table [dbo].[Accounts]    Script Date: 3/17/2016 5:21:56 PM ******/
+/****** Object:  Table [dbo].[Accounts]    Script Date: 3/31/2016 2:22:03 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -13,12 +13,12 @@ SET ANSI_PADDING ON
 GO
 CREATE TABLE [dbo].[Accounts](
 	[AccountId] [int] IDENTITY(1,1) NOT NULL,
-	[Username] [nvarchar](20) NOT NULL,
-	[FirstName] [nvarchar](35) NOT NULL,
-	[LastName] [nvarchar](35) NOT NULL,
-	[Email] [nvarchar](320) NOT NULL,
-	[Hash] [varchar](32) NOT NULL,
-	[Salt] [varchar](50) NOT NULL,
+	[Username] [varchar](50) NOT NULL,
+	[Email] [varchar](50) NOT NULL,
+	[FirstName] [varchar](50) NOT NULL,
+	[LastName] [varchar](50) NULL,
+	[Hash] [varbinary](50) NOT NULL,
+	[Salt] [varbinary](50) NOT NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[AccountId] ASC
@@ -26,50 +26,52 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 
 GO
-SET ANSI_PADDING OFF
+SET ANSI_PADDING ON
 GO
-/****** Object:  Table [dbo].[Addresses]    Script Date: 3/17/2016 5:21:56 PM ******/
+/****** Object:  Table [dbo].[Complaints]    Script Date: 3/31/2016 2:22:03 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[Addresses](
-	[AddressId] [int] IDENTITY(1,1) NOT NULL,
-	[AddressLine] [nvarchar](50) NOT NULL,
-PRIMARY KEY CLUSTERED 
-(
-	[AddressId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-
-GO
-/****** Object:  Table [dbo].[Complaints]    Script Date: 3/17/2016 5:21:56 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
+SET ANSI_PADDING ON
 GO
 CREATE TABLE [dbo].[Complaints](
 	[ComplaintId] [int] IDENTITY(1,1) NOT NULL,
-	[ProjectDataId] [int] NOT NULL,
-	[ComplaintName] [nvarchar](50) NOT NULL,
-	[SubContractorContact] [int] NULL,
+	[ProjectId] [int] NOT NULL,
+	[ConstructionAddressId] [int] NOT NULL,
+	[OccupantContactId] [int] NOT NULL,
+	[SubContractorContactId] [int] NULL,
+	[StatusId] [int] NULL,
+	[EmailStatusId] [int] NULL,
+	[ComplaintName] [nchar](10) NOT NULL,
+	[StorageDirectory] [varchar](50) NULL,
+	[Vo] [bit] NULL,
+	[SolvedSub] [bit] NULL,
+	[SolvedPm] [bit] NULL,
+	[SolvedAll] [bit] NULL,
+	[Price] [decimal](18, 0) NULL,
+	[ActionByNotEc] [varchar](50) NULL,
+	[AffirmationInhabitant] [nchar](10) NULL,
+	[RemarkArchitect] [int] NULL,
+	[RemarkClient] [int] NULL,
+	[RemarkEc] [int] NULL,
+	[RemarkEngineer] [int] NULL,
+	[RemarkExpert] [int] NULL,
+	[InternalRemarkEc] [int] NULL,
+	[LastUpdated] [date] NULL,
+	[DueDate] [date] NULL,
 	[DateCreated] [date] NOT NULL,
-	[EmailSentDate] [date] NULL,
-	[Status] [int] NULL,
-	[Remarks] [text] NULL,
-	[CreatedBy] [int] NOT NULL,
-	[ClosedBy] [int] NULL,
-	[ClosedDate] [date] NULL,
-	[AppointmentDate] [date] NULL,
-	[DueDate] [date] NOT NULL,
+	[RowVer] [timestamp] NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[ComplaintId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[ConstructionAddresses]    Script Date: 3/17/2016 5:21:56 PM ******/
+SET ANSI_PADDING ON
+GO
+/****** Object:  Table [dbo].[ConstructionAddresses]    Script Date: 3/31/2016 2:22:03 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -78,7 +80,7 @@ SET ANSI_PADDING ON
 GO
 CREATE TABLE [dbo].[ConstructionAddresses](
 	[ConstructionAddressId] [int] IDENTITY(1,1) NOT NULL,
-	[ConstructionAddress] [varchar](20) NOT NULL,
+	[ConstructionAddress] [varchar](50) NOT NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[ConstructionAddressId] ASC
@@ -86,9 +88,9 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 
 GO
-SET ANSI_PADDING OFF
+SET ANSI_PADDING ON
 GO
-/****** Object:  Table [dbo].[Contacts]    Script Date: 3/17/2016 5:21:56 PM ******/
+/****** Object:  Table [dbo].[Contacts]    Script Date: 3/31/2016 2:22:03 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -97,11 +99,12 @@ SET ANSI_PADDING ON
 GO
 CREATE TABLE [dbo].[Contacts](
 	[ContactId] [int] IDENTITY(1,1) NOT NULL,
-	[Telephone] [varchar](50) NULL,
-	[Email] [nvarchar](320) NULL,
-	[FirstName] [nvarchar](35) NULL,
-	[LastName] [nvarchar](35) NULL,
-	[Type] [int] NULL,
+	[Street] [varchar](50) NOT NULL,
+	[Number] [varchar](50) NOT NULL,
+	[Email] [varchar](50) NOT NULL,
+	[Phone] [varchar](50) NULL,
+	[FirstName] [varchar](50) NULL,
+	[LastName] [varchar](50) NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[ContactId] ASC
@@ -109,46 +112,28 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 
 GO
-SET ANSI_PADDING OFF
+SET ANSI_PADDING ON
 GO
-/****** Object:  Table [dbo].[ContactTypes]    Script Date: 3/17/2016 5:21:56 PM ******/
+/****** Object:  Table [dbo].[EmailStatuses]    Script Date: 3/31/2016 2:22:03 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_PADDING ON
 GO
-CREATE TABLE [dbo].[ContactTypes](
-	[ContactTypeId] [int] IDENTITY(1,1) NOT NULL,
-	[TypeDescription] [varchar](15) NOT NULL,
+CREATE TABLE [dbo].[EmailStatuses](
+	[EmailStatusId] [int] IDENTITY(1,1) NOT NULL,
+	[StatusDescription] [varchar](50) NOT NULL,
 PRIMARY KEY CLUSTERED 
 (
-	[ContactTypeId] ASC
+	[EmailStatusId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
 GO
-SET ANSI_PADDING OFF
+SET ANSI_PADDING ON
 GO
-/****** Object:  Table [dbo].[ProjectData]    Script Date: 3/17/2016 5:21:56 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[ProjectData](
-	[ProjectDataId] [int] IDENTITY(1,1) NOT NULL,
-	[ProjectId] [int] NOT NULL,
-	[ConstructionAddress] [int] NULL,
-	[InhabitantContact] [int] NULL,
-	[InhabitantAddress] [int] NULL,
-PRIMARY KEY CLUSTERED 
-(
-	[ProjectDataId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-
-GO
-/****** Object:  Table [dbo].[Projects]    Script Date: 3/17/2016 5:21:56 PM ******/
+/****** Object:  Table [dbo].[Projects]    Script Date: 3/31/2016 2:22:03 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -157,14 +142,11 @@ SET ANSI_PADDING ON
 GO
 CREATE TABLE [dbo].[Projects](
 	[ProjectId] [int] IDENTITY(1,1) NOT NULL,
-	[ProjectName] [nvarchar](128) NOT NULL,
-	[ClientAddress] [int] NULL,
-	[ClientContact] [int] NULL,
-	[ArchitectContact] [int] NULL,
-	[ArchitectAddress] [int] NULL,
-	[ProjectManagerContact] [int] NULL,
-	[ProjectAddress] [int] NULL,
-	[StorageDirectory] [varchar](50) NULL,
+	[ProjectName] [varchar](50) NOT NULL,
+	[ProjectAddress] [varchar](50) NOT NULL,
+	[ClientContactId] [int] NOT NULL,
+	[ArchitectContactId] [int] NOT NULL,
+	[ProjectManagerContactId] [int] NOT NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[ProjectId] ASC
@@ -172,103 +154,104 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 
 GO
-SET ANSI_PADDING OFF
+SET ANSI_PADDING ON
 GO
-/****** Object:  Table [dbo].[StatusTypes]    Script Date: 3/17/2016 5:21:56 PM ******/
+/****** Object:  Table [dbo].[Remarks]    Script Date: 3/31/2016 2:22:03 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Remarks](
+	[RemarkId] [int] IDENTITY(1,1) NOT NULL,
+	[RemarkText] [text] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[RemarkId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Statuses]    Script Date: 3/31/2016 2:22:03 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_PADDING ON
 GO
-CREATE TABLE [dbo].[StatusTypes](
-	[StatusTypeId] [int] IDENTITY(1,1) NOT NULL,
-	[StatusDescription] [varchar](15) NOT NULL,
+CREATE TABLE [dbo].[Statuses](
+	[StatusId] [int] IDENTITY(1,1) NOT NULL,
+	[StatusDescription] [varchar](50) NOT NULL,
 PRIMARY KEY CLUSTERED 
 (
-	[StatusTypeId] ASC
+	[StatusId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
 GO
-SET ANSI_PADDING OFF
+SET ANSI_PADDING ON
 GO
-ALTER TABLE [dbo].[Complaints] ADD  DEFAULT (getdate()) FOR [DateCreated]
-GO
-ALTER TABLE [dbo].[Complaints] ADD  DEFAULT ((0)) FOR [Status]
-GO
-ALTER TABLE [dbo].[Complaints]  WITH CHECK ADD  CONSTRAINT [FK_Complaints_ClosedBy] FOREIGN KEY([ClosedBy])
-REFERENCES [dbo].[Accounts] ([AccountId])
-GO
-ALTER TABLE [dbo].[Complaints] CHECK CONSTRAINT [FK_Complaints_ClosedBy]
-GO
-ALTER TABLE [dbo].[Complaints]  WITH CHECK ADD  CONSTRAINT [FK_Complaints_CreatedBy] FOREIGN KEY([CreatedBy])
-REFERENCES [dbo].[Accounts] ([AccountId])
-GO
-ALTER TABLE [dbo].[Complaints] CHECK CONSTRAINT [FK_Complaints_CreatedBy]
-GO
-ALTER TABLE [dbo].[Complaints]  WITH CHECK ADD  CONSTRAINT [FK_Complaints_ProjectData] FOREIGN KEY([ProjectDataId])
-REFERENCES [dbo].[ProjectData] ([ProjectDataId])
-GO
-ALTER TABLE [dbo].[Complaints] CHECK CONSTRAINT [FK_Complaints_ProjectData]
-GO
-ALTER TABLE [dbo].[Complaints]  WITH CHECK ADD  CONSTRAINT [FK_Complaints_Status] FOREIGN KEY([Status])
-REFERENCES [dbo].[StatusTypes] ([StatusTypeId])
-GO
-ALTER TABLE [dbo].[Complaints] CHECK CONSTRAINT [FK_Complaints_Status]
-GO
-ALTER TABLE [dbo].[Complaints]  WITH CHECK ADD  CONSTRAINT [FK_Complaints_SubContractorContact] FOREIGN KEY([SubContractorContact])
-REFERENCES [dbo].[Contacts] ([ContactId])
-GO
-ALTER TABLE [dbo].[Complaints] CHECK CONSTRAINT [FK_Complaints_SubContractorContact]
-GO
-ALTER TABLE [dbo].[Contacts]  WITH CHECK ADD  CONSTRAINT [FK_Contacts_Type] FOREIGN KEY([Type])
-REFERENCES [dbo].[ContactTypes] ([ContactTypeId])
-GO
-ALTER TABLE [dbo].[Contacts] CHECK CONSTRAINT [FK_Contacts_Type]
-GO
-ALTER TABLE [dbo].[ProjectData]  WITH CHECK ADD  CONSTRAINT [FK_ProjectData_ConstructionAddress] FOREIGN KEY([ConstructionAddress])
+SET IDENTITY_INSERT [dbo].[EmailStatuses] ON 
+
+INSERT [dbo].[EmailStatuses] ([EmailStatusId], [StatusDescription]) VALUES (1, N'EmailToSubContractor')
+INSERT [dbo].[EmailStatuses] ([EmailStatusId], [StatusDescription]) VALUES (2, N'ProposeDateToOccupant')
+INSERT [dbo].[EmailStatuses] ([EmailStatusId], [StatusDescription]) VALUES (3, N'ConfrimDateToSub')
+INSERT [dbo].[EmailStatuses] ([EmailStatusId], [StatusDescription]) VALUES (4, N'InformOfActionDate')
+INSERT [dbo].[EmailStatuses] ([EmailStatusId], [StatusDescription]) VALUES (5, N'FollowUp')
+INSERT [dbo].[EmailStatuses] ([EmailStatusId], [StatusDescription]) VALUES (6, N'SubNotResponding')
+INSERT [dbo].[EmailStatuses] ([EmailStatusId], [StatusDescription]) VALUES (7, N'OccupantNotResponding')
+INSERT [dbo].[EmailStatuses] ([EmailStatusId], [StatusDescription]) VALUES (8, N'OnHold')
+SET IDENTITY_INSERT [dbo].[EmailStatuses] OFF
+SET IDENTITY_INSERT [dbo].[Statuses] ON 
+
+INSERT [dbo].[Statuses] ([StatusId], [StatusDescription]) VALUES (1, N'NeedTechnicalCouncil')
+INSERT [dbo].[Statuses] ([StatusId], [StatusDescription]) VALUES (2, N'LessValue')
+INSERT [dbo].[Statuses] ([StatusId], [StatusDescription]) VALUES (3, N'ActionNeeded')
+INSERT [dbo].[Statuses] ([StatusId], [StatusDescription]) VALUES (4, N'Ungrounded')
+INSERT [dbo].[Statuses] ([StatusId], [StatusDescription]) VALUES (5, N'Resolved')
+INSERT [dbo].[Statuses] ([StatusId], [StatusDescription]) VALUES (6, N'OnHold')
+SET IDENTITY_INSERT [dbo].[Statuses] OFF
+ALTER TABLE [dbo].[Complaints]  WITH CHECK ADD  CONSTRAINT [FK_Complaints_ConstructionAddressId] FOREIGN KEY([ConstructionAddressId])
 REFERENCES [dbo].[ConstructionAddresses] ([ConstructionAddressId])
 GO
-ALTER TABLE [dbo].[ProjectData] CHECK CONSTRAINT [FK_ProjectData_ConstructionAddress]
+ALTER TABLE [dbo].[Complaints] CHECK CONSTRAINT [FK_Complaints_ConstructionAddressId]
 GO
-ALTER TABLE [dbo].[ProjectData]  WITH CHECK ADD  CONSTRAINT [FK_ProjectData_InhabitantAddress] FOREIGN KEY([InhabitantAddress])
-REFERENCES [dbo].[Addresses] ([AddressId])
+ALTER TABLE [dbo].[Complaints]  WITH CHECK ADD  CONSTRAINT [FK_Complaints_EmailStatusId] FOREIGN KEY([EmailStatusId])
+REFERENCES [dbo].[EmailStatuses] ([EmailStatusId])
 GO
-ALTER TABLE [dbo].[ProjectData] CHECK CONSTRAINT [FK_ProjectData_InhabitantAddress]
+ALTER TABLE [dbo].[Complaints] CHECK CONSTRAINT [FK_Complaints_EmailStatusId]
 GO
-ALTER TABLE [dbo].[ProjectData]  WITH CHECK ADD  CONSTRAINT [FK_ProjectData_InhabitantContact] FOREIGN KEY([InhabitantContact])
+ALTER TABLE [dbo].[Complaints]  WITH CHECK ADD  CONSTRAINT [FK_Complaints_OccupantContactId] FOREIGN KEY([OccupantContactId])
 REFERENCES [dbo].[Contacts] ([ContactId])
 GO
-ALTER TABLE [dbo].[ProjectData] CHECK CONSTRAINT [FK_ProjectData_InhabitantContact]
+ALTER TABLE [dbo].[Complaints] CHECK CONSTRAINT [FK_Complaints_OccupantContactId]
 GO
-ALTER TABLE [dbo].[Projects]  WITH CHECK ADD  CONSTRAINT [FK_Projects_ArchitectAddress] FOREIGN KEY([ArchitectAddress])
-REFERENCES [dbo].[Addresses] ([AddressId])
+ALTER TABLE [dbo].[Complaints]  WITH CHECK ADD  CONSTRAINT [FK_Complaints_ProjectId] FOREIGN KEY([ProjectId])
+REFERENCES [dbo].[Projects] ([ProjectId])
 GO
-ALTER TABLE [dbo].[Projects] CHECK CONSTRAINT [FK_Projects_ArchitectAddress]
+ALTER TABLE [dbo].[Complaints] CHECK CONSTRAINT [FK_Complaints_ProjectId]
 GO
-ALTER TABLE [dbo].[Projects]  WITH CHECK ADD  CONSTRAINT [FK_Projects_ArchitectContact] FOREIGN KEY([ArchitectContact])
+ALTER TABLE [dbo].[Complaints]  WITH CHECK ADD  CONSTRAINT [FK_Complaints_StatusId] FOREIGN KEY([StatusId])
+REFERENCES [dbo].[Statuses] ([StatusId])
+GO
+ALTER TABLE [dbo].[Complaints] CHECK CONSTRAINT [FK_Complaints_StatusId]
+GO
+ALTER TABLE [dbo].[Complaints]  WITH CHECK ADD  CONSTRAINT [FK_Complaints_SubContractorContactId] FOREIGN KEY([SubContractorContactId])
 REFERENCES [dbo].[Contacts] ([ContactId])
 GO
-ALTER TABLE [dbo].[Projects] CHECK CONSTRAINT [FK_Projects_ArchitectContact]
+ALTER TABLE [dbo].[Complaints] CHECK CONSTRAINT [FK_Complaints_SubContractorContactId]
 GO
-ALTER TABLE [dbo].[Projects]  WITH CHECK ADD  CONSTRAINT [FK_Projects_ClientAddress] FOREIGN KEY([ProjectAddress])
-REFERENCES [dbo].[Addresses] ([AddressId])
-GO
-ALTER TABLE [dbo].[Projects] CHECK CONSTRAINT [FK_Projects_ClientAddress]
-GO
-ALTER TABLE [dbo].[Projects]  WITH CHECK ADD  CONSTRAINT [FK_Projects_ClientContact] FOREIGN KEY([ClientContact])
+ALTER TABLE [dbo].[Projects]  WITH CHECK ADD  CONSTRAINT [FK_Projects_ArchitectContactId] FOREIGN KEY([ArchitectContactId])
 REFERENCES [dbo].[Contacts] ([ContactId])
 GO
-ALTER TABLE [dbo].[Projects] CHECK CONSTRAINT [FK_Projects_ClientContact]
+ALTER TABLE [dbo].[Projects] CHECK CONSTRAINT [FK_Projects_ArchitectContactId]
 GO
-ALTER TABLE [dbo].[Projects]  WITH CHECK ADD  CONSTRAINT [FK_Projects_ProjectAddress] FOREIGN KEY([ProjectAddress])
-REFERENCES [dbo].[Addresses] ([AddressId])
+ALTER TABLE [dbo].[Projects]  WITH CHECK ADD  CONSTRAINT [FK_Projects_ClientContactId] FOREIGN KEY([ClientContactId])
+REFERENCES [dbo].[Contacts] ([ContactId])
 GO
-ALTER TABLE [dbo].[Projects] CHECK CONSTRAINT [FK_Projects_ProjectAddress]
+ALTER TABLE [dbo].[Projects] CHECK CONSTRAINT [FK_Projects_ClientContactId]
 GO
-ALTER TABLE [dbo].[Projects]  WITH CHECK ADD  CONSTRAINT [FK_Projects_ProjectManagerContact] FOREIGN KEY([ProjectManagerContact])
-REFERENCES [dbo].[Accounts] ([AccountId])
+ALTER TABLE [dbo].[Projects]  WITH CHECK ADD  CONSTRAINT [FK_Projects_ProjectManagerContactId] FOREIGN KEY([ProjectManagerContactId])
+REFERENCES [dbo].[Contacts] ([ContactId])
 GO
-ALTER TABLE [dbo].[Projects] CHECK CONSTRAINT [FK_Projects_ProjectManagerContact]
+ALTER TABLE [dbo].[Projects] CHECK CONSTRAINT [FK_Projects_ProjectManagerContactId]
 GO
