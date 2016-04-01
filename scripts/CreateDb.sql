@@ -14,11 +14,11 @@ GO
 CREATE TABLE [dbo].[Accounts](
 	[AccountId] [int] IDENTITY(1,1) NOT NULL,
 	[Username] [varchar](50) NOT NULL,
-	[Email] [varchar](50) NOT NULL,
+	[Email] [varchar](128) NOT NULL,
 	[FirstName] [varchar](50) NOT NULL,
 	[LastName] [varchar](50) NULL,
-	[Hash] [varbinary](50) NOT NULL,
-	[Salt] [varbinary](50) NOT NULL,
+	[Hash] [varchar](32) NOT NULL,
+	[Salt] [varchar](44) NOT NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[AccountId] ASC
@@ -43,7 +43,7 @@ CREATE TABLE [dbo].[Complaints](
 	[SubContractorContactId] [int] NULL,
 	[StatusId] [int] NULL,
 	[EmailStatusId] [int] NULL,
-	[ComplaintName] [nchar](10) NOT NULL,
+	[ComplaintName] [varchar](255) NOT NULL,
 	[StorageDirectory] [varchar](50) NULL,
 	[Vo] [bit] NULL,
 	[SolvedSub] [bit] NULL,
@@ -51,7 +51,7 @@ CREATE TABLE [dbo].[Complaints](
 	[SolvedAll] [bit] NULL,
 	[Price] [decimal](18, 0) NULL,
 	[ActionByNotEc] [varchar](50) NULL,
-	[AffirmationInhabitant] [nchar](10) NULL,
+	[AffirmationInhabitant] [varchar](50) NULL,
 	[RemarkArchitect] [int] NULL,
 	[RemarkClient] [int] NULL,
 	[RemarkEc] [int] NULL,
@@ -59,6 +59,7 @@ CREATE TABLE [dbo].[Complaints](
 	[RemarkExpert] [int] NULL,
 	[InternalRemarkEc] [int] NULL,
 	[LastUpdated] [date] NULL,
+	[ActionDate] [date] NULL,
 	[DueDate] [date] NULL,
 	[DateCreated] [date] NOT NULL,
 	[RowVer] [timestamp] NULL,
@@ -101,7 +102,7 @@ CREATE TABLE [dbo].[Contacts](
 	[ContactId] [int] IDENTITY(1,1) NOT NULL,
 	[Street] [varchar](50) NOT NULL,
 	[Number] [varchar](50) NOT NULL,
-	[Email] [varchar](50) NOT NULL,
+	[Email] [varchar](128) NOT NULL,
 	[Phone] [varchar](50) NULL,
 	[FirstName] [varchar](50) NULL,
 	[LastName] [varchar](50) NULL,
@@ -142,7 +143,7 @@ SET ANSI_PADDING ON
 GO
 CREATE TABLE [dbo].[Projects](
 	[ProjectId] [int] IDENTITY(1,1) NOT NULL,
-	[ProjectName] [varchar](50) NOT NULL,
+	[ProjectName] [varchar](255) NOT NULL,
 	[ProjectAddress] [varchar](50) NOT NULL,
 	[ClientContactId] [int] NOT NULL,
 	[ArchitectContactId] [int] NOT NULL,
