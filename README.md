@@ -4,7 +4,6 @@ Cobalt is a complaint management tool designed for [Everaert-Cooreman](http://ww
 
 ## Technologies Used
 * SQL Server
-* SendGrid E-Mail Service
 * Azure Storage
 
 ## Coding Practices and Patterns Used
