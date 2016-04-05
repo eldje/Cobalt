@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
+using System.Configuration;
 
 namespace Cobalt.Infrastructure.Storage
 {
@@ -18,8 +19,8 @@ namespace Cobalt.Infrastructure.Storage
             try
             {
                 var lowContainerName = containerName.ToLowerInvariant();
-
-                var storageAccount = CloudStorageAccount.Parse(Keys.AzureStorage);
+                
+                var storageAccount = CloudStorageAccount.Parse(ConfigurationManager.AppSettings["StorageConnectionString"]);
                 var blobClient = storageAccount.CreateCloudBlobClient();
                 var container = blobClient.GetContainerReference(lowContainerName);
 
@@ -45,7 +46,7 @@ namespace Cobalt.Infrastructure.Storage
                 var extension = Path.GetExtension(path);
                 var saveAsFull = saveAs + extension;
 
-                var storageAccount = CloudStorageAccount.Parse(Keys.AzureStorage);
+                var storageAccount = CloudStorageAccount.Parse(ConfigurationManager.AppSettings["StorageConnectionString"]);
                 var blobClient = storageAccount.CreateCloudBlobClient();
                 var container = blobClient.GetContainerReference(lowContainerName);
                 var blockBlob = container.GetBlockBlobReference(saveAsFull);
@@ -70,7 +71,7 @@ namespace Cobalt.Infrastructure.Storage
         /// <returns></returns>
         public IEnumerable<string> GetBlobs(string containerName)
         {
-            var storageAccount = CloudStorageAccount.Parse(Keys.AzureStorage);
+            var storageAccount = CloudStorageAccount.Parse(ConfigurationManager.AppSettings["StorageConnectionString"]);
             var blobClient = storageAccount.CreateCloudBlobClient();
             var container = blobClient.GetContainerReference(containerName);
 
@@ -105,7 +106,7 @@ namespace Cobalt.Infrastructure.Storage
         {
             try
             {
-                var storageAccount = CloudStorageAccount.Parse(Keys.AzureStorage);
+                var storageAccount = CloudStorageAccount.Parse(ConfigurationManager.AppSettings["StorageConnectionString"]);
                 var blobClient = storageAccount.CreateCloudBlobClient();
                 var container = blobClient.GetContainerReference(containerName);
                 var blockBlob = container.GetBlockBlobReference(blobReference);
