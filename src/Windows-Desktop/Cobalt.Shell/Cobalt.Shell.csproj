@@ -130,6 +130,16 @@
   <ItemGroup>
     <Folder Include="ViewModels\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cobalt.Modules.DataGrid\Cobalt.Modules.DataGrid.csproj">
+      <Project>{2CFC9724-F0AA-4E08-BB12-7C63439B53CD}</Project>
+      <Name>Cobalt.Modules.DataGrid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cobalt.Modules.Ribbon\Cobalt.Modules.Ribbon.csproj">
+      <Project>{3F5F5206-E66D-4280-9BB5-E8FBDE65D1A5}</Project>
+      <Name>Cobalt.Modules.Ribbon</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
