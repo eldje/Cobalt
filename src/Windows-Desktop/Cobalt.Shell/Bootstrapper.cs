@@ -3,7 +3,7 @@ using Microsoft.Practices.Unity;
 using Prism.Modularity;
 using Prism.Mvvm;
 using Prism.Unity;
-using Cobalt.Modules.DataGrid;
+using Cobalt.Modules.MainModule;
 using Cobalt.Modules.Ribbon;
 
 namespace Cobalt.Shell
@@ -22,9 +22,9 @@ namespace Cobalt.Shell
 
         protected override void ConfigureModuleCatalog()
         {
-            var catalog = (ModuleCatalog)ModuleCatalog;
-            catalog.AddModule(typeof(DataGridModuleBase));
-            catalog.AddModule(typeof(RibbonModuleBase));
+            var catalog = (ModuleCatalog) ModuleCatalog;
+            catalog.AddModule(typeof (RibbonModuleBase));
+            catalog.AddModule(typeof (MainModuleBase));
         }
 
         protected override void ConfigureContainer()

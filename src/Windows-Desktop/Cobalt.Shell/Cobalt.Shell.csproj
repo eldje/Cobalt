@@ -131,9 +131,9 @@
     <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Cobalt.Modules.DataGrid\Cobalt.Modules.DataGrid.csproj">
-      <Project>{2CFC9724-F0AA-4E08-BB12-7C63439B53CD}</Project>
-      <Name>Cobalt.Modules.DataGrid</Name>
+    <ProjectReference Include="..\Cobalt.Modules.MainModule\Cobalt.Modules.MainModule.csproj">
+      <Project>{40d49f4e-bdc0-42b1-810a-b92983f6be5d}</Project>
+      <Name>Cobalt.Modules.MainModule</Name>
     </ProjectReference>
     <ProjectReference Include="..\Cobalt.Modules.Ribbon\Cobalt.Modules.Ribbon.csproj">
       <Project>{3F5F5206-E66D-4280-9BB5-E8FBDE65D1A5}</Project>

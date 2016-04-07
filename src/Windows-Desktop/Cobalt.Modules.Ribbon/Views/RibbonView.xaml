@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
              d:DesignHeight="332" d:DesignWidth="646">
     <Grid>
@@ -19,19 +21,19 @@
                 </RibbonApplicationMenu>
             </Ribbon.ApplicationMenu>
 
-            <RibbonTab Header="Home" KeyTip="H" >
+            <RibbonTab Header="Home" KeyTip="H" IsEnabled="{Binding IsEnabled}">
                 <RibbonGroup Header="Search">
                     <RibbonButton SmallImageSource="..\Images\group_go.png" Label="Search Contacts" KeyTip="O" />
                     <RibbonButton SmallImageSource="..\Images\map.png" Label="Search Projects" KeyTip="P" />
                     <RibbonButton SmallImageSource="..\Images\house.png" Label="Search Complaints" KeyTip="C" />
                 </RibbonGroup>
 
-                <RibbonGroup Header="Import and Export">
+                <RibbonGroup Header="Import and Export" IsEnabled="{Binding IsEnabled}">
                     <RibbonButton SmallImageSource="..\Images\page_excel.png" Label="Import data from Excel file" KeyTip="E" />
                     <RibbonButton SmallImageSource="..\Images\page_white_acrobat.png" Label="Export data to PDF" KeyTip="P" />
                 </RibbonGroup>
 
-                <RibbonGroup Header="Images">
+                <RibbonGroup Header="Images" IsEnabled="{Binding IsEnabled}">
                     <RibbonButton SmallImageSource="..\Images\images.png" Label="Upload Images" KeyTip="I" />
                     <RibbonButton SmallImageSource="..\Images\image.png" Label="Search Images" KeyTip="I" />
                 </RibbonGroup>

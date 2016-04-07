@@ -3,9 +3,9 @@ using Cobalt.DataAccess.Models;
 using Cobalt.DataAccess.Repositories;
 using Cobalt.Infrastructure.Cryptography;
 
-namespace Cobalt.Modules.Login.Services
+namespace Cobalt.Modules.MainModule.Services
 {
-    public class LoginService
+    public class LoginService : ILoginService
     {
         private readonly IAccountRepository _accountRepository;
 
