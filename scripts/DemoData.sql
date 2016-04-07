@@ -43,24 +43,6 @@ INSERT INTO [dbo].[Projects]
 		   ('Alpha Ave Construction','1798 Alpha Avenue', 5, 2, 1)
 GO
 
-INSERT INTO [dbo].[ConstructionAddresses]
-           ([ConstructionAddress])
-     VALUES
-           ('A1'),
-		   ('A2'),
-		   ('A3'),
-		   ('A4'),
-		   ('A5'),
-		   ('B1'),
-		   ('B2'),
-		   ('B3'),
-		   ('B4'),
-		   ('B5'),
-		   ('C1'),
-		   ('C2'),
-		   ('C3')
-GO
-
 INSERT INTO [dbo].[Remarks]
            ([RemarkText])
      VALUES
@@ -74,7 +56,7 @@ GO
 
 INSERT INTO [dbo].[Complaints]
            ([ProjectId]
-           ,[ConstructionAddressId]
+           ,[ConstructionAddress]
            ,[OccupantContactId]
            ,[SubContractorContactId]
            ,[StatusId]
@@ -99,8 +81,8 @@ INSERT INTO [dbo].[Complaints]
            ,[DueDate]
            ,[DateCreated])
      VALUES
-           (1, 1, 7, 8, null, null, 'Foundation Cracks', null, null, null, null, null, 14500, null, null, null, 1, null, null, null, null, null, null, '4/28/2016', GETDATE()),
-		   (1, 1, 7, 8, null, null, 'Drywall', null, null, null, null, null, 500, null, null, null, 2, 3, null, null, null, null, null, '4/28/2016', GETDATE()),
-		   (2, 4, 9, 10, null, null, 'Light Fixture', null, null, null, null, null, 150, null, null, null, 4, 5, null, null, null, null, null, '4/30/2016', GETDATE()),
-		   (2, 4, 9, 10, null, null, 'Plumbing', null, null, null, null, null, 14500, null, null, 6, null, null, null, null, null, null, null, '4/30/2016', GETDATE())
+           (1, 'A1', 7, 8, null, null, 'Foundation Cracks', null, null, null, null, null, 14500, null, null, null, 1, null, null, null, null, null, null, '4/28/2016', GETDATE()),
+		   (1, 'A1', 7, 8, null, null, 'Drywall', null, null, null, null, null, 500, null, null, null, 2, 3, null, null, null, null, null, '4/28/2016', GETDATE()),
+		   (2, 'B6', 9, 10, null, null, 'Light Fixture', null, null, null, null, null, 150, null, null, null, 4, 5, null, null, null, null, null, '4/30/2016', GETDATE()),
+		   (2, 'B6', 9, 10, null, null, 'Plumbing', null, null, null, null, null, 14500, null, null, 6, null, null, null, null, null, null, null, '4/30/2016', GETDATE())
 GO

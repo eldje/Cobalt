@@ -1,7 +1,7 @@
 -- =============================================
 -- Author: Travis Boatman
 -- Create date: March 17, 2016
--- Last modifed: March 31, 2016
+-- Last modifed: April 6, 2016
 -- =============================================
 
 /****** Object:  Table [dbo].[Accounts]    Script Date: 3/31/2016 2:22:03 PM ******/
@@ -38,7 +38,7 @@ GO
 CREATE TABLE [dbo].[Complaints](
 	[ComplaintId] [int] IDENTITY(1,1) NOT NULL,
 	[ProjectId] [int] NOT NULL,
-	[ConstructionAddressId] [int] NOT NULL,
+	[ConstructionAddress] [varchar](25) NOT NULL,
 	[OccupantContactId] [int] NOT NULL,
 	[SubContractorContactId] [int] NULL,
 	[StatusId] [int] NULL,
@@ -66,25 +66,6 @@ CREATE TABLE [dbo].[Complaints](
 PRIMARY KEY CLUSTERED 
 (
 	[ComplaintId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-
-GO
-SET ANSI_PADDING ON
-GO
-/****** Object:  Table [dbo].[ConstructionAddresses]    Script Date: 3/31/2016 2:22:03 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-CREATE TABLE [dbo].[ConstructionAddresses](
-	[ConstructionAddressId] [int] IDENTITY(1,1) NOT NULL,
-	[ConstructionAddress] [varchar](50) NOT NULL,
-PRIMARY KEY CLUSTERED 
-(
-	[ConstructionAddressId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
@@ -211,11 +192,6 @@ INSERT [dbo].[Statuses] ([StatusId], [StatusDescription]) VALUES (4, N'Ungrounde
 INSERT [dbo].[Statuses] ([StatusId], [StatusDescription]) VALUES (5, N'Resolved')
 INSERT [dbo].[Statuses] ([StatusId], [StatusDescription]) VALUES (6, N'OnHold')
 SET IDENTITY_INSERT [dbo].[Statuses] OFF
-ALTER TABLE [dbo].[Complaints]  WITH CHECK ADD  CONSTRAINT [FK_Complaints_ConstructionAddressId] FOREIGN KEY([ConstructionAddressId])
-REFERENCES [dbo].[ConstructionAddresses] ([ConstructionAddressId])
-GO
-ALTER TABLE [dbo].[Complaints] CHECK CONSTRAINT [FK_Complaints_ConstructionAddressId]
-GO
 ALTER TABLE [dbo].[Complaints]  WITH CHECK ADD  CONSTRAINT [FK_Complaints_EmailStatusId] FOREIGN KEY([EmailStatusId])
 REFERENCES [dbo].[EmailStatuses] ([EmailStatusId])
 GO
