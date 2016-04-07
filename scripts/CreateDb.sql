@@ -232,3 +232,33 @@ REFERENCES [dbo].[Contacts] ([ContactId])
 GO
 ALTER TABLE [dbo].[Projects] CHECK CONSTRAINT [FK_Projects_ProjectManagerContactId]
 GO
+ALTER TABLE [dbo].[Complaints]  WITH CHECK ADD  CONSTRAINT [FK_Complaints_RemarkArchitect] FOREIGN KEY([RemarkArchitect])
+REFERENCES [dbo].[Remarks] ([RemarkId])
+GO
+ALTER TABLE [dbo].[Complaints] CHECK CONSTRAINT [FK_Complaints_RemarkArchitect]
+GO
+ALTER TABLE [dbo].[Complaints]  WITH CHECK ADD  CONSTRAINT [FK_Complaints_RemarkClient] FOREIGN KEY([RemarkClient])
+REFERENCES [dbo].[Remarks] ([RemarkId])
+GO
+ALTER TABLE [dbo].[Complaints] CHECK CONSTRAINT [FK_Complaints_RemarkClient]
+GO
+ALTER TABLE [dbo].[Complaints]  WITH CHECK ADD  CONSTRAINT [FK_Complaints_RemarkEc] FOREIGN KEY([RemarkEc])
+REFERENCES [dbo].[Remarks] ([RemarkId])
+GO
+ALTER TABLE [dbo].[Complaints] CHECK CONSTRAINT [FK_Complaints_RemarkEc]
+GO
+ALTER TABLE [dbo].[Complaints]  WITH CHECK ADD  CONSTRAINT [FK_Complaints_RemarkEngineer] FOREIGN KEY([RemarkEngineer])
+REFERENCES [dbo].[Remarks] ([RemarkId])
+GO
+ALTER TABLE [dbo].[Complaints] CHECK CONSTRAINT [FK_Complaints_RemarkEngineer]
+GO
+ALTER TABLE [dbo].[Complaints]  WITH CHECK ADD  CONSTRAINT [FK_Complaints_RemarkExpert] FOREIGN KEY([RemarkExpert])
+REFERENCES [dbo].[Remarks] ([RemarkId])
+GO
+ALTER TABLE [dbo].[Complaints] CHECK CONSTRAINT [FK_Complaints_RemarkExpert]
+GO
+ALTER TABLE [dbo].[Complaints]  WITH CHECK ADD  CONSTRAINT [FK_Complaints_InternalRemarkEc] FOREIGN KEY([InternalRemarkEc])
+REFERENCES [dbo].[Remarks] ([RemarkId])
+GO
+ALTER TABLE [dbo].[Complaints] CHECK CONSTRAINT [FK_Complaints_InternalRemarkEc]
+GO
