@@ -170,8 +170,14 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 
 GO
+CREATE TABLE [dbo].[DbVersion] (
+    [Version] VARCHAR (128) NOT NULL
+)
+
+GO
 SET ANSI_PADDING ON
 GO
+INSERT [dbo].[DbVersion] ([Version]) VALUES (N'3.4')
 SET IDENTITY_INSERT [dbo].[EmailStatuses] ON 
 
 INSERT [dbo].[EmailStatuses] ([EmailStatusId], [StatusDescription]) VALUES (1, N'EmailToSubContractor')
