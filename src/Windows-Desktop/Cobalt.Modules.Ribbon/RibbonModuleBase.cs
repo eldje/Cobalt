@@ -1,5 +1,4 @@
 ﻿using Cobalt.Modules.Ribbon.Views;
-using Microsoft.Practices.Unity;
 using Prism.Modularity;
 using Prism.Regions;
 

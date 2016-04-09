@@ -4,27 +4,47 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:prism="http://prismlibrary.com/"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="500">
     <Grid>
+
+        
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Height="255" Margin="10,105,10,140" Width="480">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="111*"/>
                 <ColumnDefinition Width="277*"/>
             </Grid.ColumnDefinitions>
 
-            <TextBox Height="23" Margin="10.578,32,10,0" TextWrapping="Wrap" Text="{Binding Username}" VerticalAlignment="Top" Grid.Column="1"/>
-            <TextBox Height="23" Margin="10.578,81,10,0" TextWrapping="Wrap" Text="{Binding Password}" VerticalAlignment="Top" Grid.Column="1"/>
+            <TextBox x:Name="UsernameBox" Height="23" Margin="10.578,32,10,0" TextWrapping="Wrap" Text="{Binding Username}" VerticalAlignment="Top" Grid.Column="1"/>
+            <TextBox x:Name="PasswordBox" Height="23" Margin="10.578,81,10,0" TextWrapping="Wrap" Text="{Binding Password}" VerticalAlignment="Top" Grid.Column="1"/>
 
             <TextBlock HorizontalAlignment="Left" Margin="10.578,11,0,0" TextWrapping="Wrap" Text="Username:" VerticalAlignment="Top" Grid.Column="1"/>
             <TextBlock HorizontalAlignment="Left" Margin="10.578,60,0,0" TextWrapping="Wrap" Text="Password:" VerticalAlignment="Top" Grid.Column="1"/>
 
-            <Button Content="Login" Margin="11,135,137,0" VerticalAlignment="Top" Grid.Column="1" Command="{Binding LoginCommand}"/>
+            <Button Content="Login" Margin="11,135,137,0" VerticalAlignment="Top" Grid.Column="1" Command="{Binding LoginCommand}">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Text.Length, ElementName=UsernameBox, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Text.Length, ElementName=PasswordBox, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
 
             <Image Grid.Column="0" HorizontalAlignment="Left" Height="100" Margin="10,11,0,0" VerticalAlignment="Top" Width="100" Source="../Images/secrecy-icon.png"/>
             
             <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="14,109,0,0" TextWrapping="Wrap" Text="{Binding ErrorMessage}" VerticalAlignment="Top" Foreground="Red"/>
         </Grid>
+
+        <xctk:BusyIndicator IsBusy="{Binding LoginIsRunning}" BusyContent="Logging In..."/>
+
     </Grid>
 </UserControl>

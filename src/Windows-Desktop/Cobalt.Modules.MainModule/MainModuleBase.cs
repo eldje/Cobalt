@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Cobalt.DataAccess.Repositories;
-using Cobalt.Modules.MainModule.Services;
+﻿using Cobalt.Infrastructure;
 using Cobalt.Modules.MainModule.Views;
 using Microsoft.Practices.Unity;
 using Prism.Modularity;
@@ -25,10 +19,9 @@ namespace Cobalt.Modules.MainModule
 
         public void Initialize()
         {
-            _container.RegisterType<ILoginService, LoginService>();
-            _container.RegisterType<IAccountRepository, AccountRepository>();
+            _container.RegisterType<object, DataGridView>("DataGridView");
 
-            _regionManager.RegisterViewWithRegion("DataRegion", typeof(LoginView));
+            _regionManager.RegisterViewWithRegion(RegionNames.DataRegion, typeof(LoginView));
         }
     }
 }
