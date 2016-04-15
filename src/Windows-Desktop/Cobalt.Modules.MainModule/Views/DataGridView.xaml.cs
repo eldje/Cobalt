@@ -1,11 +1,6 @@
-﻿using System.Windows.Controls;
-
-namespace Cobalt.Modules.MainModule.Views
+﻿namespace Cobalt.Modules.MainModule.Views
 {
-    /// <summary>
-    /// Interaction logic for DataGridView.xaml
-    /// </summary>
-    public partial class DataGridView : UserControl
+    public partial class DataGridView
     {
         public DataGridView()
         {

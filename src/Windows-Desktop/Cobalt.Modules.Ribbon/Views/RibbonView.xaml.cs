@@ -1,11 +1,6 @@
-﻿using System.Windows.Controls;
-
-namespace Cobalt.Modules.Ribbon.Views
+﻿namespace Cobalt.Modules.Ribbon.Views
 {
-    /// <summary>
-    /// Interaction logic for RibbonView.xaml
-    /// </summary>
-    public partial class RibbonView : UserControl
+    public partial class RibbonView
     {
         public RibbonView()
         {
