@@ -1,4 +1,6 @@
-﻿using Cobalt.Infrastructure;
+﻿using Cobalt.DataAccess.Context;
+using Cobalt.DataAccess.Services;
+using Cobalt.Infrastructure;
 using Cobalt.Modules.MainModule.Views;
 using Microsoft.Practices.Unity;
 using Prism.Modularity;
@@ -20,8 +22,10 @@ namespace Cobalt.Modules.MainModule
         public void Initialize()
         {
             _container.RegisterType<object, DataGridView>("DataGridView");
+            _container.RegisterType<ICobaltContext, CobaltContext>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<IComplaintService, ComplaintService>();
 
-            _regionManager.RegisterViewWithRegion(RegionNames.DataRegion, typeof(LoginView));
+            _regionManager.RegisterViewWithRegion(RegionNames.DataRegion, typeof(DataGridView));
         }
     }
 }
