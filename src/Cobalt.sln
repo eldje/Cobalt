@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cobalt.Shell", "Cobalt\Cobalt.Shell\Cobalt.Shell.csproj", "{0E504689-F239-492B-A3B1-BB01D34DD129}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{B14C0A2C-52FE-476C-BC64-31E75A0272CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cobalt.DataAccess", "Cobalt\Cobalt.DataAccess\Cobalt.DataAccess.csproj", "{6757D6C3-8CC4-4BEA-8E11-716CC9AB61D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cobalt.Modules.TabContent", "Cobalt\Cobalt.Modules.TabContent\Cobalt.Modules.TabContent.csproj", "{428199BB-3CE7-46C6-A92E-9C8CF53B0766}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cobalt.Infrastructure", "Cobalt\Cobalt.Infrastructure\Cobalt.Infrastructure.csproj", "{0C3685D4-34A3-49DB-A805-5CC091CF9BD8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cobalt.Modules.ToolBars", "Cobalt\Cobalt.Modules.ToolBars\Cobalt.Modules.ToolBars.csproj", "{DC80B8A1-FF48-4D0C-9D82-F8051230AC57}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0E504689-F239-492B-A3B1-BB01D34DD129}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E504689-F239-492B-A3B1-BB01D34DD129}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E504689-F239-492B-A3B1-BB01D34DD129}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E504689-F239-492B-A3B1-BB01D34DD129}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6757D6C3-8CC4-4BEA-8E11-716CC9AB61D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6757D6C3-8CC4-4BEA-8E11-716CC9AB61D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6757D6C3-8CC4-4BEA-8E11-716CC9AB61D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6757D6C3-8CC4-4BEA-8E11-716CC9AB61D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{428199BB-3CE7-46C6-A92E-9C8CF53B0766}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{428199BB-3CE7-46C6-A92E-9C8CF53B0766}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{428199BB-3CE7-46C6-A92E-9C8CF53B0766}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{428199BB-3CE7-46C6-A92E-9C8CF53B0766}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C3685D4-34A3-49DB-A805-5CC091CF9BD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C3685D4-34A3-49DB-A805-5CC091CF9BD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C3685D4-34A3-49DB-A805-5CC091CF9BD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C3685D4-34A3-49DB-A805-5CC091CF9BD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC80B8A1-FF48-4D0C-9D82-F8051230AC57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC80B8A1-FF48-4D0C-9D82-F8051230AC57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC80B8A1-FF48-4D0C-9D82-F8051230AC57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC80B8A1-FF48-4D0C-9D82-F8051230AC57}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{428199BB-3CE7-46C6-A92E-9C8CF53B0766} = {B14C0A2C-52FE-476C-BC64-31E75A0272CC}
+		{DC80B8A1-FF48-4D0C-9D82-F8051230AC57} = {B14C0A2C-52FE-476C-BC64-31E75A0272CC}
+	EndGlobalSection
+EndGlobal

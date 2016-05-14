@@ -1,0 +1,291 @@
+﻿<UserControl x:Class="Cobalt.Modules.TabContent.Views.ComplaintResultsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:local="clr-namespace:Cobalt.DataAccess.Models;assembly=Cobalt.DataAccess"
+             xmlns:extensions="clr-namespace:Cobalt.Infrastructure.Extensions;assembly=Cobalt.Infrastructure"
+             xmlns:viewModels="clr-namespace:Cobalt.Modules.TabContent.ViewModels"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d" d:DesignWidth="1373"
+             d:DataContext="{d:DesignInstance Type=viewModels:ComplaintResultsViewModel}" d:DesignHeight="782">
+
+    <i:Interaction.Triggers>
+        <prism:InteractionRequestTrigger SourceObject="{Binding ConfrimDeleteRequest}">
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True" />
+        </prism:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
+
+    <UserControl.Resources>
+        <Style x:Key="ControlTemplate" TargetType="{x:Type GroupBox}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=DataGridControl, Path=ItemsSource}" Value="{x:Null}">
+                    <Setter Property="IsEnabled" Value="False" />
+                </DataTrigger>
+            </Style.Triggers>
+            <Setter Property="IsEnabled" Value="True" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type GroupBox}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <Border Grid.Row="0"
+                        BorderThickness="0"
+                        BorderBrush="#25A0DA"
+                        Background="#25A0DA">
+                                <Label Foreground="White">
+                                    <ContentPresenter
+                                          ContentSource="Header"
+                                          RecognizesAccessKey="True" />
+                                </Label>
+                            </Border>
+
+                            <Border Grid.Row="1"
+                        BorderThickness="1,0,1,1"
+                        BorderBrush="#25A0DA">
+                                <ContentPresenter Margin="4" />
+                            </Border>
+
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </UserControl.Resources>
+
+    <Grid Background="#ededed">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="179*" />
+            <RowDefinition Height="93*" />
+        </Grid.RowDefinitions>
+
+        <xcdg:DataGridControl
+            ItemsSource="{Binding Complaints, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}"
+            AutoCreateColumns="False" ReadOnly="True"
+            SelectedItem="{Binding SelectedComplaint}" Grid.Row="1" Margin="0,0,0,10" Name="DataGridControl" SelectionMode="Single" NavigationBehavior="RowOnly">
+
+            <xcdg:DataGridControl.Columns>
+                <xcdg:Column Title="Project Id" FieldName="ProjectId" />
+                <xcdg:Column Title="Complaint Id" FieldName="ComplaintId" />
+
+                <xcdg:Column Title="Construction Address" FieldName="OccupantContact.Address.ConstructionAddress" />
+                <xcdg:Column Title="Occupant Address" FieldName="OccupantContact.Address.FullAddress" />
+                <xcdg:Column Title="Occupant Phone" FieldName="OccupantContact.Phone" />
+                <xcdg:Column Title="Occupant Email" FieldName="OccupantContact.Email" />
+                <xcdg:Column Title="Complaint Name" FieldName="ComplaintName" />
+                <xcdg:Column Title="SubContractor" FieldName="SubContractorContact.FirstName" />
+
+                <xcdg:Column Title="Vo" FieldName="Vo" />
+                <xcdg:Column Title="Solved Sub" FieldName="SolvedSub" />
+                <xcdg:Column Title="Solved Pm" FieldName="SolvedPm" />
+                <xcdg:Column Title="Solved All" FieldName="SolvedAll" />
+
+                <xcdg:Column Title="Complaint Status" FieldName="ComplaintStatus" />
+                <xcdg:Column Title="Email Status" FieldName="EmailStatus" />
+
+                <xcdg:Column Title="Price" FieldName="Price" />
+                <xcdg:Column Title="ActionByNotEc" FieldName="ActionByNotEc" />
+                <xcdg:Column Title="AffirmationInhabitant" FieldName="AffirmationInhabitant" />
+
+                <xcdg:Column Title="RemarkArchitect" FieldName="RemarkArchitect" />
+                <xcdg:Column Title="RemarkClient" FieldName="RemarkClient" />
+                <xcdg:Column Title="RemarkEc" FieldName="RemarkEc" />
+                <xcdg:Column Title="RemarkEngineer" FieldName="RemarkEngineer" />
+                <xcdg:Column Title="RemarkExpert" FieldName="RemarkExpert" />
+                <xcdg:Column Title="InternalRemarkEc" FieldName="InternalRemarkEc" />
+
+                <xcdg:Column Title="ActionDate" FieldName="ActionDate" />
+                <xcdg:Column Title="DueDate" FieldName="DueDate" />
+                <xcdg:Column Title="LastUpdated" FieldName="LastUpdated" />
+                <xcdg:Column Title="DateCreated" FieldName="DateCreated" />
+            </xcdg:DataGridControl.Columns>
+        </xcdg:DataGridControl>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Button Command="{Binding EditComplaintCommand}" Margin="0,8,8,8">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../Images/disk.png" />
+                    <TextBlock Text="   Save Changes" />
+                </StackPanel>
+            </Button>
+
+            <Button Command="{Binding EditComplaintCommand}" Margin="0,8,8,8">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="IsEnabled" Value="True" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=DataGridControl, Path=ItemsSource}" Value="{x:Null}">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../Images/arrow-circle-315.png" />
+                    <TextBlock Text="   Refresh" />
+                </StackPanel>
+            </Button>
+            
+            <Button Command="{Binding EditComplaintCommand}" Margin="0,8,8,8">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="IsEnabled" Value="True" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=DataGridControl, Path=ItemsSource}" Value="{x:Null}">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../Images/cross.png" />
+                    <TextBlock Text="   Discard Changes" />
+                </StackPanel>
+            </Button>
+            <Button Command="{Binding EditComplaintCommand}" Margin="50,8,8,8">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="IsEnabled" Value="True" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=DataGridControl, Path=ItemsSource}" Value="{x:Null}">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../Images/document--plus.png" />
+                    <TextBlock Text="   Add Complaint" />
+                </StackPanel>
+            </Button>
+            <Button Command="{Binding EditComplaintCommand}" Margin="0,8,8,8">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="IsEnabled" Value="True" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=DataGridControl, Path=SelectedItem}" Value="{x:Null}">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../Images/document--minus.png" />
+                    <TextBlock Text="   Delete Complaint" />
+                </StackPanel>
+            </Button>
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="2">
+            <Grid Background="#ededed">
+                <GroupBox Header="Remarks" Margin="472,10,10,10" Style="{StaticResource ControlTemplate}">
+                    <ScrollViewer>
+                        <Grid Background="#ededed">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="416*"/>
+                                <ColumnDefinition Width="431*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="66*"/>
+                                <RowDefinition Height="65*"/>
+                                <RowDefinition Height="65*"/>
+                                <RowDefinition Height="7*"/>
+                            </Grid.RowDefinitions>
+                            <TextBox Height="40" Margin="10,21,29,0" TextWrapping="Wrap" Text="{Binding SelectedComplaint.RemarkArchitect}"
+                                     VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Auto" />
+                            <TextBox Margin="26,21,28,0" TextWrapping="Wrap" Text="{Binding SelectedComplaint.RemarkEngineer}" Grid.Column="1" Height="40" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+
+                            <TextBox Height="40" Margin="10,21,29,0" TextWrapping="Wrap" Text="{Binding SelectedComplaint.RemarkClient}"
+                                     VerticalAlignment="Top" Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+
+                            <TextBox Height="40" Margin="10,22,29,0" TextWrapping="Wrap" Text="{Binding SelectedComplaint.RemarkEc}"
+                                     VerticalAlignment="Top" Grid.Row="2" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+
+                            <TextBox Height="40" Margin="26,21,28,0" TextWrapping="Wrap" Text="{Binding SelectedComplaint.RemarkExpert}"
+                                     VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+
+                            <TextBox Height="40" Margin="26,22,28,0" TextWrapping="Wrap" Text="{Binding SelectedComplaint.InternalRemarkEc}"
+                            	VerticalAlignment="Top" Grid.Row="2" Grid.Column="1" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                            <TextBlock HorizontalAlignment="Left" Margin="31,1,0,0" TextWrapping="Wrap" Text="Everaert-Cooreman" VerticalAlignment="Top" Grid.Row="2"/>
+                            <TextBlock HorizontalAlignment="Left" Margin="31,3,0,0" TextWrapping="Wrap" Text="Client" VerticalAlignment="Top" Grid.Row="1"/>
+                            <TextBlock HorizontalAlignment="Left" Margin="31,3,0,0" TextWrapping="Wrap" Text="Architect" VerticalAlignment="Top"/>
+                            <TextBlock HorizontalAlignment="Left" Margin="47,3,0,0" TextWrapping="Wrap" Text="Engineer" VerticalAlignment="Top" Grid.Column="1"/>
+                            <TextBlock HorizontalAlignment="Left" Margin="47,3,0,0" TextWrapping="Wrap" Text="Expert" VerticalAlignment="Top" Grid.Column="1" Grid.Row="1"/>
+                            <TextBlock HorizontalAlignment="Left" Margin="47,1,0,0" TextWrapping="Wrap" Text="Internal" VerticalAlignment="Top" Grid.Column="1" Grid.Row="2"/>
+
+                            <Image HorizontalAlignment="Left" Height="Auto" Margin="26,3,0,0" VerticalAlignment="Top" Width="Auto" Grid.Column="1" Source="../Images/user-green.png" Stretch="None"/>
+                            <Image HorizontalAlignment="Left" Height="Auto" Margin="26,3,0,0" VerticalAlignment="Top" Width="Auto" Grid.Column="1" Source="../Images/user-medical-female.png" Stretch="None" Grid.Row="1"/>
+                            <Image HorizontalAlignment="Left" Height="Auto" Margin="26,1,0,0" VerticalAlignment="Top" Width="Auto" Grid.Column="1" Source="../Images/user-black.png" Stretch="None" Grid.Row="2"/>
+                            <Image HorizontalAlignment="Left" Height="Auto" Margin="10,1,0,0" VerticalAlignment="Top" Width="Auto" Source="../Images/user-medical.png" Stretch="None" Grid.Row="2"/>
+                            <Image HorizontalAlignment="Left" Height="Auto" Margin="10,3,0,0" VerticalAlignment="Top" Width="Auto" Source="../Images/user-worker-boss.png" Stretch="None"/>
+                            <Image HorizontalAlignment="Left" Height="Auto" Margin="10,3,0,0" VerticalAlignment="Top" Width="Auto" Source="../Images/user-black-female.png" Stretch="None" Grid.Row="1"/>
+
+                        </Grid>
+                    </ScrollViewer>
+                </GroupBox>
+                <GroupBox Header="General" HorizontalAlignment="Left" Margin="10,10,0,10" Width="457"
+                          Style="{StaticResource ControlTemplate}">
+                    <Grid Background="#ededed">
+
+                        <ComboBox HorizontalAlignment="Left" Margin="168,40,0,0" VerticalAlignment="Top" Width="144" ItemsSource="{Binding Source={extensions:EnumBindingSource {x:Type local:ComplaintStatusType}}}" SelectedValue="{Binding SelectedComplaint.ComplaintStatus}"/>
+                        <ComboBox HorizontalAlignment="Left" Margin="168,67,0,0" VerticalAlignment="Top" Width="144" ItemsSource="{Binding Source={extensions:EnumBindingSource {x:Type local:EmailStatusType}}}" SelectedValue="{Binding SelectedComplaint.EmailStatus}" />
+                        <ComboBox HorizontalAlignment="Left" Margin="168,95,0,0" VerticalAlignment="Top" Width="144" ItemsSource="{Binding Source={extensions:EnumBindingSource {x:Type local:ActionByNotEcType}}}" SelectedValue="{Binding SelectedComplaint.ActionByNotEc}"/>
+
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="168,9,0,0" TextWrapping="Wrap"
+                                 Text="{Binding SelectedComplaint.ComplaintName}" VerticalAlignment="Top" Width="269" />
+                        <DatePicker HorizontalAlignment="Left" Margin="168,122,0,0" VerticalAlignment="Top" Width="144" SelectedDate="{Binding SelectedComplaint.DueDate}"/>
+                        <DatePicker HorizontalAlignment="Left" Margin="168,151,0,0" VerticalAlignment="Top" Width="144" SelectedDate="{Binding SelectedComplaint.ActionDate}"/>
+
+                        <CheckBox Content="Vo" HorizontalAlignment="Left" Margin="333,40,0,0" VerticalAlignment="Top" IsChecked="{Binding SelectedComplaint.Vo}"/>
+                        <CheckBox Content="Solved Sub" HorizontalAlignment="Left" Margin="333,60,0,0"
+                                  VerticalAlignment="Top" IsChecked="{Binding SelectedComplaint.SolvedSub}"/>
+                        <CheckBox Content="Solved PM" HorizontalAlignment="Left" Margin="333,80,0,0"
+                                  VerticalAlignment="Top" IsChecked="{Binding SelectedComplaint.SolvedPm}"/>
+                        <CheckBox Content="Solved All" HorizontalAlignment="Left" Margin="333,100,0,0"
+                                  VerticalAlignment="Top" IsChecked="{Binding SelectedComplaint.SolvedAll}"/>
+
+
+
+                        <TextBlock HorizontalAlignment="Left" Margin="40,9,0,0" TextWrapping="Wrap" Text="Complaint Name"
+                        	VerticalAlignment="Top" />
+                        <TextBlock HorizontalAlignment="Left" Margin="40,36,0,0" TextWrapping="Wrap" Text="Status" Height="16" VerticalAlignment="Top" />
+                        <TextBlock HorizontalAlignment="Left" Margin="40,64,0,0" TextWrapping="Wrap" Text="Email Status"
+                                   VerticalAlignment="Top" />
+                        <TextBlock HorizontalAlignment="Left" Margin="40,94,0,0" TextWrapping="Wrap"
+                                   Text="Action Not Ec" VerticalAlignment="Top" />
+                        <TextBlock HorizontalAlignment="Left" Margin="40,121,0,0" TextWrapping="Wrap" Text="Due Date"
+                                   VerticalAlignment="Top" />
+                        <TextBlock HorizontalAlignment="Left" Margin="40,151,0,0" TextWrapping="Wrap" Text="Action Date"
+                                   VerticalAlignment="Top" />
+
+                        <Image HorizontalAlignment="Left" Height="19" Margin="10,9,0,0" VerticalAlignment="Top" Width="Auto" Source="../Images/information.png"/>
+                        <Image HorizontalAlignment="Left" Height="19" Margin="10,36,0,0" VerticalAlignment="Top" Width="Auto" Source="../Images/flag-green.png"/>
+                        <Image HorizontalAlignment="Left" Height="19" Margin="10,67,0,0" VerticalAlignment="Top" Width="Auto" Source="../Images/flag-yellow.png"/>
+                        <Image HorizontalAlignment="Left" Height="19" Margin="10,95,0,0" VerticalAlignment="Top" Width="Auto" Source="../Images/flag-purple.png"/>
+                        <Image HorizontalAlignment="Left" Height="19" Margin="10,122,0,0" VerticalAlignment="Top" Width="Auto" Source="../Images/calendar-day.png"/>
+                        <Image HorizontalAlignment="Left" Height="19" Margin="10,151,0,0" VerticalAlignment="Top" Width="Auto" Source="../Images/calendar-blue.png"/>
+
+                        <Button Content="Change/Add" HorizontalAlignment="Left" Margin="341,171,0,0" VerticalAlignment="Top" Width="Auto"/>
+
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="168,189,0,-9" TextWrapping="Wrap" Text="{Binding SelectedComplaint.Price}" VerticalAlignment="Top" Width="144"/>
+                        <TextBlock HorizontalAlignment="Left" Margin="40,189,0,-2" TextWrapping="Wrap" Text="Price" VerticalAlignment="Top"/>
+                        <Image HorizontalAlignment="Left" Height="19" Margin="10,189,0,-5" VerticalAlignment="Top" Width="Auto" Source="../Images/money-bag-dollar.png"/>
+
+                        <RadioButton Content="Occupant" HorizontalAlignment="Left" Margin="333,131,0,0" VerticalAlignment="Top"/>
+                        <RadioButton Content="SubContractor" HorizontalAlignment="Left" Margin="333,151,0,0" VerticalAlignment="Top"/>
+
+                    </Grid>
+                </GroupBox>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

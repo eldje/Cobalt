@@ -1,0 +1,186 @@
+﻿<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModels="clr-namespace:Cobalt.Modules.TabContent.ViewModels"
+             x:Class="Cobalt.Modules.TabContent.Views.ComplaintSearchView"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d"
+             d:DesignHeight="563.282"
+             d:DataContext="{d:DesignInstance Type=viewModels:ComplaintSearchViewModel}" d:DesignWidth="1099.314">
+    <Grid>
+
+        <Grid.Resources>
+            <DataTemplate x:Key="StringOperators" DataType="{x:Type viewModels:ComplaintSearchViewModel}">
+                <ComboBox>
+                    <ComboBoxItem Content="Contains"/>
+                    <ComboBoxItem Content="Equals"/>
+                </ComboBox>
+            </DataTemplate>
+
+            <DataTemplate x:Key="ContactBoolEnumOperators" DataType="{x:Type viewModels:ComplaintSearchViewModel}">
+                <ComboBox>
+                    <ComboBoxItem Content="Equals"/>
+                </ComboBox>
+            </DataTemplate>
+
+            <DataTemplate x:Key="IntDateOperators">
+                <ComboBox>
+                    <ComboBoxItem Content="More Then Or Equal To"/>
+                    <ComboBoxItem Content="More Then Or Equal To"/>
+                    <ComboBoxItem Content="More Then"/>
+                    <ComboBoxItem Content="Less Then"/>
+                    <ComboBoxItem Content="Equals"/>
+                </ComboBox>
+            </DataTemplate>
+
+            <DataTemplate x:Key="StringIntValues">
+                <TextBox/>
+            </DataTemplate>
+
+            <DataTemplate x:Key="BoolValues">
+                <ComboBox>
+                    <ComboBoxItem Content="True"/>
+                    <ComboBoxItem Content="False"/>
+                </ComboBox>
+            </DataTemplate>
+
+            <DataTemplate x:Key="ContactValues">
+                <StackPanel Orientation="Horizontal">
+                    <Button/>
+                    <TextBlock/>
+                </StackPanel>
+            </DataTemplate>
+
+            <DataTemplate x:Key="ProjectValues">
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Search for Project"/>
+                    <TextBlock/>
+                </StackPanel>
+            </DataTemplate>
+
+            <DataTemplate x:Key="DateValues">
+                <DatePicker/>
+            </DataTemplate>
+
+            <DataTemplate x:Key="EnumEmailStatusValues">
+                <ComboBox/>
+            </DataTemplate>
+
+            <DataTemplate x:Key="EnumComplaintStatusValues">
+                <ComboBox/>
+            </DataTemplate>
+
+            <Style TargetType="ContentControl" x:Key="ContentControlStyle">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding PropertySelectedItem}" Value="Complaint Name">
+                        <Setter Property="Content" Value="{StaticResource StringOperators}" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding PropertySelectedItem}" Value="Project">
+                        <Setter Property="Content" Value="{StaticResource ContactBoolEnumOperators}" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="611*"/>
+            <ColumnDefinition Width="488*"/>
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="44*"/>
+                <RowDefinition Height="475*"/>
+                <RowDefinition Height="44*"/>
+            </Grid.RowDefinitions>
+            <ListView ItemsSource="{Binding SearchFilters, Mode=TwoWay, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}" Grid.IsSharedSizeScope="True" Grid.Row="1">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="150">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ComboBox Width="135" Text="{Binding DataContext.PropertySelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}}" SelectedIndex="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                                        <ComboBoxItem Content="Complaint Name" />
+                                        <ComboBoxItem Content="Project" />
+                                        <ComboBoxItem Content="Vo" />
+                                        <ComboBoxItem Content="Solved Sub" />
+                                        <ComboBoxItem Content="Solved PM" />
+                                        <ComboBoxItem Content="Solved All" />
+                                        <ComboBoxItem Content="Occupant Contact" />
+                                        <ComboBoxItem Content="SubContractor Contact" />
+                                        <ComboBoxItem Content="Email Status" />
+                                        <ComboBoxItem Content="Complaint Status" />
+                                        <ComboBoxItem Content="Due Date" />
+                                        <ComboBoxItem Content="Action Date" />
+                                        <ComboBoxItem Content="Price" />
+                                    </ComboBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                            <TextBlock Text="Property" />
+                        </GridViewColumn>
+
+                        <GridViewColumn Width="200">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate DataType="{x:Type viewModels:ComplaintSearchViewModel}">
+                                    <ContentControl Content="{Binding}" Width="175">
+                                        <ContentControl.Style>
+                                            <Style TargetType="{x:Type ContentControl}">
+
+                                                <!-- Default Template -->
+                                                <Setter Property="ContentTemplate" Value="{StaticResource StringOperators}" />
+
+                                                <!-- Triggers to change Template -->
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding DataContext.PropertySelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}}" Value="Project">
+                                                        <Setter Property="ContentTemplate" Value="{StaticResource ContactBoolEnumOperators}" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </ContentControl.Style>
+                                    </ContentControl>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+
+                            <TextBlock Text="Operator" />
+                        </GridViewColumn>
+
+                        <GridViewColumn Width="200">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ContentControl Content="{Binding}" Width="175">
+                                        <ContentControl.Style>
+                                            <Style TargetType="{x:Type ContentControl}">
+
+                                                <!-- Default Template -->
+                                                <Setter Property="ContentTemplate" Value="{StaticResource StringIntValues}" />
+
+                                                <!-- Triggers to change Template -->
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding DataContext.PropertySelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}}" Value="Project">
+                                                        <Setter Property="ContentTemplate" Value="{StaticResource ProjectValues}" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </ContentControl.Style>
+                                    </ContentControl>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                            <TextBlock Text="Value" />
+                        </GridViewColumn>
+
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <Button Content="Search" HorizontalAlignment="Left" Margin="10,10,0,8" Width="49" Command="{Binding SearchCommand}" Grid.Row="2"/>
+
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Height="44" VerticalAlignment="Top">
+                <Button Content="Add New" Margin="0,10,20,10" Command="{Binding AddFilterCommand}"/>
+                <Button Content="Remove" Margin="0,10,20,10"/>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Column="1" />
+
+    </Grid>
+</UserControl>
