@@ -1,0 +1,284 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{428199BB-3CE7-46C6-A92E-9C8CF53B0766}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Cobalt.Modules.TabContent</RootNamespace>
+    <AssemblyName>Cobalt.Modules.TabContent</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\build\Windows-Desktop\debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\build\Windows-Desktop\release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Storage, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\WindowsAzure.Storage.7.0.0\lib\net40\Microsoft.WindowsAzure.Storage.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Prism, Version=6.1.0.0, Culture=neutral, PublicKeyToken=91a96d2a154366d8, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Prism.Core.6.1.0\lib\net45\Prism.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Prism.Wpf, Version=6.1.0.0, Culture=neutral, PublicKeyToken=91a96d2a154366d8, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Prism.Wpf.6.1.0\lib\net45\Prism.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Linq.Dynamic, Version=1.0.5840.25917, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Linq.Dynamic.1.0.6\lib\net40\System.Linq.Dynamic.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=2.8.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Extended.Wpf.Toolkit.2.8\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=2.8.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Extended.Wpf.Toolkit.2.8\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=2.8.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Extended.Wpf.Toolkit.2.8\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=2.8.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Extended.Wpf.Toolkit.2.8\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid, Version=2.8.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Extended.Wpf.Toolkit.2.8\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=2.8.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Extended.Wpf.Toolkit.2.8\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Services\ExpressionBuilder.cs" />
+    <Compile Include="Services\FileStorageService.cs" />
+    <Compile Include="Services\ComplaintService.cs" />
+    <Compile Include="Services\ContactService.cs" />
+    <Compile Include="Services\ImportService.cs" />
+    <Compile Include="Services\Interfaces\IExpressionBuilder.cs" />
+    <Compile Include="Services\Interfaces\IFileStorageService.cs" />
+    <Compile Include="Services\Interfaces\IComplaintService.cs" />
+    <Compile Include="Services\Interfaces\IContactService.cs" />
+    <Compile Include="Services\Interfaces\IImportService.cs" />
+    <Compile Include="TabContentModule.cs" />
+    <Compile Include="ViewModels\ComplaintResultsViewModel.cs" />
+    <Compile Include="ViewModels\ComplaintSearchViewModel.cs" />
+    <Compile Include="ViewModels\ContactResultsViewModel.cs" />
+    <Compile Include="ViewModels\ContactSearchViewModel.cs" />
+    <Compile Include="ViewModels\FileStorageViewModel.cs" />
+    <Compile Include="ViewModels\ImportExportViewModel.cs" />
+    <Compile Include="Views\ComplaintResultsView.xaml.cs">
+      <DependentUpon>ComplaintResultsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ComplaintSearchView.xaml.cs">
+      <DependentUpon>ComplaintSearchView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ContactResultsView.xaml.cs">
+      <DependentUpon>ContactResultsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ContactSearchView.xaml.cs">
+      <DependentUpon>ContactSearchView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FileStorageView.xaml.cs">
+      <DependentUpon>FileStorageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ImportExportView.xaml.cs">
+      <DependentUpon>ImportExportView.xaml</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Views\ComplaintResultsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ComplaintSearchView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ContactResultsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ContactSearchView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FileStorageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ImportExportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cobalt.DataAccess\Cobalt.DataAccess.csproj">
+      <Project>{6757d6c3-8cc4-4bea-8e11-716cc9ab61d7}</Project>
+      <Name>Cobalt.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cobalt.Infrastructure\Cobalt.Infrastructure.csproj">
+      <Project>{0c3685d4-34a3-49db-a805-5cc091cf9bd8}</Project>
+      <Name>Cobalt.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\box-search-result.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\binocular.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ui-text-field.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\arrow-circle-315.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\cross.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\document--plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\flag-green.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\flag-yellow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\alarm-clock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\flag-purple.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\user-medium.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\user-medium-female.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\user-medical.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\user-worker-boss.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\user-black.png" />
+    <Resource Include="Images\user-green.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\upload-cloud.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\download-cloud.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\alarm-clock-blue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\bookmark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\calendar-day.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\calendar-blue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\information.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\user-black-female.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\user-medical-female.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\money-bag-dollar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\document--minus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\disk.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

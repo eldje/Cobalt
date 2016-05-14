@@ -1,0 +1,76 @@
+﻿<Window x:Class="Cobalt.Shell.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:regions="http://prismlibrary.com/"
+        xmlns:prism="http://prismlibrary.com/"
+        xmlns:infrastructure="clr-namespace:Cobalt.Infrastructure;assembly=Cobalt.Infrastructure"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        mc:Ignorable="d"
+        Title="Cobalt: Everaert-Cooreman" Height="Auto" Width="Auto" Icon="../Images/CobaltIcon.ico">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <ContentControl regions:RegionManager.RegionName="{x:Static infrastructure:RegionNames.MenuRegion}"
+                        Grid.Row="0" />
+
+        <TabControl Grid.Row="1" Style="{StaticResource TabControlStyle}">
+
+            <!--Complaints tab region.-->
+            <TabItem Style="{StaticResource TabItemStyle}">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="../Images/inbox-table.png" />
+                        <TextBlock Text="   Complaints" />
+                    </StackPanel>
+                </TabItem.Header>
+                <ContentControl
+                    regions:RegionManager.RegionName="{x:Static infrastructure:RegionNames.ComplaintRegion}" />
+            </TabItem>
+
+            <!--Contacts tab region.-->
+            <TabItem Style="{StaticResource TabItemStyle}">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="../Images/user.png" />
+                        <TextBlock Text="   Contacts" />
+                    </StackPanel>
+                </TabItem.Header>
+                <ContentControl regions:RegionManager.RegionName="{x:Static infrastructure:RegionNames.ContactRegion}" />
+            </TabItem>
+
+            <!--Import & Export tab region.-->
+            <TabItem Style="{StaticResource TabItemStyle}">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="../Images/arrow-curve.png" />
+                        <TextBlock Text="   Import &amp; Export" />
+                    </StackPanel>
+                </TabItem.Header>
+                <ContentControl
+                    regions:RegionManager.RegionName="{x:Static infrastructure:RegionNames.ImportExportRegion}" />
+            </TabItem>
+
+            <!--File Storage tab region.-->
+            <TabItem Style="{StaticResource TabItemStyle}">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="../Images/globe-green.png" />
+                        <TextBlock Text="   File Storage" />
+                    </StackPanel>
+                </TabItem.Header>
+                <ContentControl
+                    regions:RegionManager.RegionName="{x:Static infrastructure:RegionNames.FileStorageRegion}" />
+            </TabItem>
+        </TabControl>
+
+        <ContentControl regions:RegionManager.RegionName="{x:Static infrastructure:RegionNames.StatusBarRegion}"
+                        Grid.Row="2" />
+    </Grid>
+</Window>
